@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
@@ -33,10 +31,7 @@ namespace WebAPI.Controllers
         {
             var dCandidate = await _context.DCandidates.FindAsync(id);
 
-            if (dCandidate == null)
-            {
-                return NotFound();
-            }
+            if (dCandidate == null) return NotFound();
 
             return dCandidate;
         }
@@ -58,13 +53,8 @@ namespace WebAPI.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!DCandidateExists(id))
-                {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
@@ -79,7 +69,7 @@ namespace WebAPI.Controllers
             _context.DCandidates.Add(dCandidate);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDCandidate", new { id = dCandidate.id }, dCandidate);
+            return CreatedAtAction("GetDCandidate", new {dCandidate.id}, dCandidate);
         }
 
         // DELETE: api/DCandidate/5
@@ -87,10 +77,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<DCandidate>> DeleteDCandidate(int id)
         {
             var dCandidate = await _context.DCandidates.FindAsync(id);
-            if (dCandidate == null)
-            {
-                return NotFound();
-            }
+            if (dCandidate == null) return NotFound();
 
             _context.DCandidates.Remove(dCandidate);
             await _context.SaveChangesAsync();
