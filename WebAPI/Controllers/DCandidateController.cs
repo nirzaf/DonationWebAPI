@@ -12,9 +12,9 @@ namespace WebAPI.Controllers
     [ApiController]
     public class DCandidateController : ControllerBase
     {
-        private readonly DonationDBContext _context;
+        private readonly DonationDbContext _context;
 
-        public DCandidateController(DonationDBContext context)
+        public DCandidateController(DonationDbContext context)
         {
             _context = context;
         }

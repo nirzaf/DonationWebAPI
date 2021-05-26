@@ -8,7 +8,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Migrations
 {
-    [DbContext(typeof(DonationDBContext))]
+    [DbContext(typeof(DonationDbContext))]
     [Migration("20210526173027_init")]
     partial class init
     {

@@ -7,43 +7,43 @@ using WebAPI.Models;
 
 namespace WebAPI.Migrations
 {
-    [DbContext(typeof(DonationDBContext))]
+    [DbContext(typeof(DonationDbContext))]
     partial class DonationDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("WebAPI.Models.DCandidate", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("address")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Age")
+                    b.Property<int>("age")
                         .HasColumnType("int");
 
-                    b.Property<string>("BloodGroup")
+                    b.Property<string>("bloodGroup")
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("fullName")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Mobile")
+                    b.Property<string>("mobile")
                         .HasColumnType("nvarchar(16)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("DCandidates");
                 });
