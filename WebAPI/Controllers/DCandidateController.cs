@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
             _context.DCandidates.Add(dCandidate);
             await _context.SaveChangesAsync();
             Func<string, object, object, CreatedAtActionResult> createdAtAction = CreatedAtAction;
-            var obj = createdAtAction($"GetDCandidate", new {id = dCandidate.Id}, dCandidate) ??
+            var obj = createdAtAction($"GetDCandidate", new { id = dCandidate.Id }, dCandidate) ??
                       throw new ArgumentNullException(
                           $"CreatedAtAction($\"GetDCandidate\", new { dCandidate.Id }, dCandidate)");
             return obj;
