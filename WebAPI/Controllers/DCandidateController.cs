@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -68,12 +69,15 @@ namespace WebAPI.Controllers
         {
             _context.DCandidates.Add(dCandidate);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetDCandidate", new {dCandidate.id}, dCandidate);
+            Func<string, object, object, CreatedAtActionResult> createdAtAction = CreatedAtAction;
+            var obj = createdAtAction($"GetDCandidate", new {dCandidate.id}, dCandidate) ??
+                      throw new ArgumentNullException(
+                          $"CreatedAtAction($\"GetDCandidate\", new { dCandidate.id }, dCandidate)");
+            return obj;
         }
 
         // DELETE: api/DCandidate/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<DCandidate>> DeleteDCandidate(int id)
         {
             var dCandidate = await _context.DCandidates.FindAsync(id);
