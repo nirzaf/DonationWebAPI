@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDCandidate(int id, DCandidate dCandidate)
         {
-            dCandidate.id = id;
+            dCandidate.Id = id;
 
             _context.Entry(dCandidate).State = EntityState.Modified;
 
@@ -70,9 +70,9 @@ namespace WebAPI.Controllers
             _context.DCandidates.Add(dCandidate);
             await _context.SaveChangesAsync();
             Func<string, object, object, CreatedAtActionResult> createdAtAction = CreatedAtAction;
-            var obj = createdAtAction($"GetDCandidate", new {dCandidate.id}, dCandidate) ??
+            var obj = createdAtAction($"GetDCandidate", new { id = dCandidate.Id }, dCandidate) ??
                       throw new ArgumentNullException(
-                          $"CreatedAtAction($\"GetDCandidate\", new { dCandidate.id }, dCandidate)");
+                          $"CreatedAtAction($\"GetDCandidate\", new { dCandidate.Id }, dCandidate)");
             return obj;
         }
 
@@ -91,7 +91,7 @@ namespace WebAPI.Controllers
 
         private bool DCandidateExists(int id)
         {
-            return _context.DCandidates.Any(e => e.id == id);
+            return _context.DCandidates.Any(e => e.Id == id);
         }
     }
 }
