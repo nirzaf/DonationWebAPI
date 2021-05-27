@@ -21,10 +21,7 @@ namespace WebAPI.Controllers
 
         // GET: api/DCandidate
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DCandidate>>> GetDCandidates()
-        {
-            return await _context.DCandidates.ToListAsync();
-        }
+        public async Task<ActionResult<IEnumerable<DCandidate>>> GetDCandidates() => await _context.DCandidates.ToListAsync();
 
         // GET: api/DCandidate/5
         [HttpGet("{id}")]
